@@ -18,12 +18,28 @@ export default function AppFunctional(props) {
   function getXY() {
     // It it not necessary to have a state to track the coordinates.
     // It's enough to know what index the "B" is at, to be able to calculate them.
+    const coordinates = [
+                          { x:1,y:1 },
+                          { x:2,y:1 },
+                          { x:3,y:1 },
+                          { x:1,y:2 },
+                          { x:2,y:2 },
+                          { x:3,y:2 },
+                          { x:1,y:3 },
+                          { x:2,y:3 },
+                          { x:3,y:3 }
+                        ];
+    
+    return [coordinates[index].x,coordinates[index].y];
   }
 
   function getXYMessage() {
     // It it not necessary to have a state to track the "Coordinates (2, 2)" message for the user.
     // You can use the `getXY` helper above to obtain the coordinates, and then `getXYMessage`
     // returns the fully constructed string.
+    const [x, y] = getXY();
+
+    return `Coordinates (${x}, ${y})`;
   }
 
   function reset() {
@@ -56,7 +72,7 @@ export default function AppFunctional(props) {
   return (
     <div id="wrapper" className={props.className}>
       <div className="info">
-        <h3 id="coordinates">Coordinates (2, 2)</h3>
+        <h3 id="coordinates">{getXYMessage()}</h3>
         <h3 id="steps">{`You moved ${steps} times`}</h3>
       </div>
       <div id="grid">
