@@ -70,8 +70,8 @@ export default function AppFunctional(props) {
   function move(evt) {
     // This event handler can use the helper above to obtain a new index for the "B",
     // and change any states accordingly.
-    // setIndex(getNextIndex());
-    // setSteps(steps++)
+    setIndex(getNextIndex());
+    setSteps(steps + 1);
   }
 
   function onChange(evt) {
