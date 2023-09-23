@@ -14,11 +14,7 @@ export default function AppFunctional(props) {
   const [message, setMessage] = useState(initialMessage);
   const [email, setEmail] = useState(initialEmail);
   const [index, setIndex] = useState(initialIndex);
-
-  function getXY() {
-    // It it not necessary to have a state to track the coordinates.
-    // It's enough to know what index the "B" is at, to be able to calculate them.
-    const coordinates = [
+  const coordinates = [
                           { x:1,y:1 },
                           { x:2,y:1 },
                           { x:3,y:1 },
@@ -29,7 +25,10 @@ export default function AppFunctional(props) {
                           { x:2,y:3 },
                           { x:3,y:3 }
                         ];
-    
+
+  function getXY() {
+    // It it not necessary to have a state to track the coordinates.
+    // It's enough to know what index the "B" is at, to be able to calculate them.
     return [coordinates[index].x,coordinates[index].y];
   }
 
@@ -54,11 +53,25 @@ export default function AppFunctional(props) {
     // This helper takes a direction ("left", "up", etc) and calculates what the next index
     // of the "B" would be. If the move is impossible because we are at the edge of the grid,
     // this helper should return the current index unchanged.
+    let [x, y] = getXY();
+
+    if (direction === 'down' && y < 3) y++;
+    if (direction === 'up' && y > 1) y--;
+    if (direction === 'left' && x > 1) x--;
+    if (direction === 'right' && x < 3) x++;
+
+    for (let i = 0; i < coordinates.length; i++) {
+      if (coordinates[i].x == x && coordinates[i].y == y) {
+        return i;
+      }
+    }
   }
 
   function move(evt) {
     // This event handler can use the helper above to obtain a new index for the "B",
     // and change any states accordingly.
+    // setIndex(getNextIndex());
+    // setSteps(steps++)
   }
 
   function onChange(evt) {
