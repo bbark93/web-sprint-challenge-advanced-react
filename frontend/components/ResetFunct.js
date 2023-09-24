@@ -7,6 +7,7 @@ const initialIndex = 4; // the index the "B" is at
 
 export default function ResetFunct(props) {
   function reset() {
+    // console.log(props);
     props.setSteps(initialSteps);
     props.setMessage(initialMessage);
     props.setEmail(initialEmail);

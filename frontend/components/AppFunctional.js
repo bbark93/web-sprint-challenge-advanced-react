@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
 import ResetFunct from './ResetFunct'
+import InfoFunct from './InfoFunct'
 
 // Suggested initial states
 const initialMessage = ''
@@ -124,10 +125,11 @@ export default function AppFunctional(props) {
 
   return (
     <div id="wrapper" className={props.className}>
-      <div className="info">
+      <InfoFunct steps={steps} index={index}/>
+      {/* <div className="info">
         <h3 id="coordinates">{getXYMessage()}</h3>
         <h3 id="steps">{`You moved ${steps} times`}</h3>
-      </div>
+      </div> */}
       <div id="grid">
         {
           [0, 1, 2, 3, 4, 5, 6, 7, 8].map(idx => (
@@ -146,12 +148,12 @@ export default function AppFunctional(props) {
         <button id="up" onClick={move} >UP</button>
         <button id="right" onClick={move} >RIGHT</button>
         <button id="down" onClick={move} >DOWN</button>
-        <button id="reset" onClick={reset} >reset</button>
-        {/* <ResetFunct 
+        {/* <button id="reset" onClick={reset} >reset</button> */}
+        <ResetFunct 
             setEmail={setEmail} 
             setIndex={setEmail}
             setSteps={setSteps}
-            setMessage={setMessage}/> */}
+            setMessage={setMessage}/>
       </div>
       <form onSubmit={onSubmit}>
         <input id="email" type="email" placeholder="type email" onChange={onChange}></input>
