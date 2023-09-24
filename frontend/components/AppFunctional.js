@@ -60,6 +60,9 @@ export default function AppFunctional(props) {
     if (direction === 'left' && x > 1) x--;
     if (direction === 'right' && x < 3) x++;
 
+    console.log('x = ',x);
+    console.log('y = ',y);
+
     for (let i = 0; i < coordinates.length; i++) {
       if (coordinates[i].x == x && coordinates[i].y == y) {
         return i;
@@ -70,7 +73,15 @@ export default function AppFunctional(props) {
   function move(evt) {
     // This event handler can use the helper above to obtain a new index for the "B",
     // and change any states accordingly.
-    setIndex(getNextIndex());
+    console.log(evt.target.id);
+    const direction = evt.target.id;
+
+    setMessage(initialMessage);
+    if (getNextIndex(direction) == index){
+      setMessage(`You can't go ${direction}`)
+      return;
+    } 
+    setIndex(getNextIndex(direction));
     setSteps(steps + 1);
   }
 
@@ -98,13 +109,13 @@ export default function AppFunctional(props) {
         }
       </div>
       <div className="info">
-        <h3 id="message"></h3>
+        <h3 id="message">{message}</h3>
       </div>
       <div id="keypad">
-        <button id="left">LEFT</button>
-        <button id="up">UP</button>
-        <button id="right">RIGHT</button>
-        <button id="down">DOWN</button>
+        <button id="left" onClick={move} >LEFT</button>
+        <button id="up" onClick={move} >UP</button>
+        <button id="right" onClick={move} >RIGHT</button>
+        <button id="down" onClick={move} >DOWN</button>
         <button id="reset" onClick={reset} >reset</button>
       </div>
       <form>
