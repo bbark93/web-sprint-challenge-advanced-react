@@ -1,10 +1,11 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+
+import ResetFunct from './ResetFunct'
 
 // Suggested initial states
 const initialMessage = ''
-const initialEmail = ''//{email: ''};
+const initialEmail = ''
 const initialSteps = 0
 const initialIndex = 4 // the index the "B" is at
 
@@ -61,9 +62,6 @@ export default function AppFunctional(props) {
     if (direction === 'left' && x > 1) x--;
     if (direction === 'right' && x < 3) x++;
 
-    console.log('x = ',x);
-    console.log('y = ',y);
-
     for (let i = 0; i < coordinates.length; i++) {
       if (coordinates[i].x == x && coordinates[i].y == y) {
         return i;
@@ -94,8 +92,11 @@ export default function AppFunctional(props) {
   function onSubmit(evt) {
     // Use a POST request to send a payload to the server.
     evt.preventDefault();
+    setEmail(evt.target.value);
     console.log(email);
     formSubmit();
+    setEmail(initialEmail);
+
   }
 
   const postPayload = payload => {
@@ -105,7 +106,8 @@ export default function AppFunctional(props) {
         setMessage(res.data.message);
       })
       .catch(err => {
-        console.log(err);
+        // console.log(err);
+        if (err.response.status == 403) setMessage(err.response.data.message);
       })
   }
 
@@ -134,6 +136,7 @@ export default function AppFunctional(props) {
             </div>
           ))
         }
+        {console.log(index)}
       </div>
       <div className="info">
         <h3 id="message">{message}</h3>
@@ -144,6 +147,11 @@ export default function AppFunctional(props) {
         <button id="right" onClick={move} >RIGHT</button>
         <button id="down" onClick={move} >DOWN</button>
         <button id="reset" onClick={reset} >reset</button>
+        {/* <ResetFunct 
+            setEmail={setEmail} 
+            setIndex={setEmail}
+            setSteps={setSteps}
+            setMessage={setMessage}/> */}
       </div>
       <form onSubmit={onSubmit}>
         <input id="email" type="email" placeholder="type email" onChange={onChange}></input>
