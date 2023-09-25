@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 
-import ResetFunct from './ResetFunct'
+// import ResetFunct from './ResetFunct'
 import InfoFunct from './InfoFunct'
 
 // Suggested initial states
@@ -35,14 +35,14 @@ export default function AppFunctional(props) {
     return [coordinates[index].x,coordinates[index].y];
   }
 
-  function getXYMessage() {
-    // It it not necessary to have a state to track the "Coordinates (2, 2)" message for the user.
-    // You can use the `getXY` helper above to obtain the coordinates, and then `getXYMessage`
-    // returns the fully constructed string.
-    const [x, y] = getXY();
+  // function getXYMessage() {
+  //   // It it not necessary to have a state to track the "Coordinates (2, 2)" message for the user.
+  //   // You can use the `getXY` helper above to obtain the coordinates, and then `getXYMessage`
+  //   // returns the fully constructed string.
+  //   const [x, y] = getXY();
 
-    return `Coordinates (${x}, ${y})`;
-  }
+  //   return `Coordinates (${x}, ${y})`;
+  // }
 
   function reset() {
     // Use this helper to reset all states to their initial values.
@@ -148,12 +148,12 @@ export default function AppFunctional(props) {
         <button id="up" onClick={move} >UP</button>
         <button id="right" onClick={move} >RIGHT</button>
         <button id="down" onClick={move} >DOWN</button>
-        {/* <button id="reset" onClick={reset} >reset</button> */}
-        <ResetFunct 
+        <button id="reset" onClick={reset} >reset</button>
+        {/* <ResetFunct 
             setEmail={setEmail} 
             setIndex={setEmail}
             setSteps={setSteps}
-            setMessage={setMessage}/>
+            setMessage={setMessage}/> */}
       </div>
       <form onSubmit={onSubmit}>
         <input id="email" type="email" placeholder="type email" onChange={onChange}></input>
