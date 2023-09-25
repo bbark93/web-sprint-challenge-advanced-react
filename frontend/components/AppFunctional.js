@@ -107,8 +107,9 @@ export default function AppFunctional(props) {
         setMessage(res.data.message);
       })
       .catch(err => {
-        // console.log(err);
+        console.log(err);
         if (err.response.status == 403) setMessage(err.response.data.message);
+        if (err.response.status == 422) setMessage(err.response.data.message);
       })
   }
 
