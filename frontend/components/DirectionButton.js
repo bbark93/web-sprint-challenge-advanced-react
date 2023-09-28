@@ -3,7 +3,7 @@ import { getXY, coordinates } from "./InfoFunct";
 
 export default function DirectionButton(props) {
   function getNextIndex(direction) {
-    let [x, y] = getXY();
+    let [x, y] = getXY(props.index);
 
     if (direction === "down" && y < 3) y++;
     if (direction === "up" && y > 1) y--;
@@ -18,14 +18,14 @@ export default function DirectionButton(props) {
   }
 
   function move(evt) {
-    const direction = evt.target.id;
+    const Direction = evt.target.id;
 
     props.setMessage("");
-    if (getNextIndex(direction) == props.index) {
-      props.setMessage(`You can't go ${direction}`);
+    if (getNextIndex(Direction) == props.index) {
+      props.setMessage(`You can't go ${Direction}`);
       return;
     }
-    props.setIndex(getNextIndex(direction));
+    props.setIndex(getNextIndex(Direction));
     props.setSteps(props.steps + 1);
   }
 
