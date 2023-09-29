@@ -1,6 +1,8 @@
 import React from 'react'
 import axios from 'axios'
 
+import InfoClass from './InfoClass'
+
 // Suggested initial states
 const initialMessage = ''
 const initialEmail = ''
@@ -103,17 +105,16 @@ export default class AppClass extends React.Component {
     };
 
     this.postPayload(payload);
+    this.setState({email: initialEmail})
   }
 
   postPayload = (payload) => {
     axios
       .post("http://localhost:9000/api/result", payload)
       .then((res) => {
-        console.log(res.data);
         this.setState({message: res.data.message});
       })
       .catch((err) => {
-        console.log(err);
         if (err.response.status == 403) this.setState({message: err.response.data.message});
         if (err.response.status == 422) this.setState({message: err.response.data.message});
       });
@@ -123,10 +124,7 @@ export default class AppClass extends React.Component {
     const { className } = this.props
     return (
       <div id="wrapper" className={className}>
-        <div className="info">
-          <h3 id="coordinates">{this.getXYMessage()}</h3>
-          <h3 id="steps">You moved {this.state.steps} times</h3>
-        </div>
+        <InfoClass state={this.state} coordinates={coordinates} />
         <div id="grid">
           {
             [0, 1, 2, 3, 4, 5, 6, 7, 8].map(idx => (
