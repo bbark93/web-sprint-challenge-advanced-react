@@ -17,7 +17,7 @@ export default function AppFunctional(props) {
   const [steps, setSteps] = useState(initialSteps);
   const [message, setMessage] = useState(initialMessage);
   const [email, setEmail] = useState(initialEmail);
-  const [index, setIndex] = useState(initialIndex) 
+  const [index, setIndex] = useState(initialIndex); 
 
   function onChange(evt) {
     // You will need this to update the value of the input.
@@ -28,7 +28,6 @@ export default function AppFunctional(props) {
   function onSubmit(evt) {
     // Use a POST request to send a payload to the server.
     evt.preventDefault();
-    // const [x, y] = getXY();
     const payload = {
       x: coordinates[index].x,
       y: coordinates[index].y,
