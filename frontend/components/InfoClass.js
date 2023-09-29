@@ -1,12 +1,12 @@
 import React from "react";
 
 export default class InfoClass extends React.Component {
-    getXY = () => {
-        return [this.props.coordinates[this.props.state.index].x, this.props.coordinates[this.props.state.index].y];
-    }
+    // getXY = () => {
+    //     return [this.props.coordinates[this.props.state.index].x, this.props.coordinates[this.props.state.index].y];
+    // }
 
     getXYMessage = () => {
-        const [x, y] = this.getXY(this.props.state.index);
+        const [x, y] = this.props.getXY(this.props.state.index);
     
         return `Coordinates (${x}, ${y})`;
       }

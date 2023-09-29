@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 
 import InfoClass from './InfoClass'
+import DirectBtnClass from './DirectBtnClass'
 
 // Suggested initial states
 const initialMessage = ''
@@ -88,6 +89,10 @@ export default class AppClass extends React.Component {
     this.setState({steps: this.state.steps + 1});
   }
 
+  updateState = (stateValue, stateName)=> {
+    this.setState({[stateName]:stateValue});
+  }
+
   onChange = (evt) => {
     // You will need this to update the value of the input.
     evt.preventDefault();
@@ -124,7 +129,7 @@ export default class AppClass extends React.Component {
     const { className } = this.props
     return (
       <div id="wrapper" className={className}>
-        <InfoClass state={this.state} coordinates={coordinates} />
+        <InfoClass state={this.state} coordinates={coordinates} getXY={this.getXY} />
         <div id="grid">
           {
             [0, 1, 2, 3, 4, 5, 6, 7, 8].map(idx => (
@@ -137,13 +142,14 @@ export default class AppClass extends React.Component {
         <div className="info">
           <h3 id="message">{this.state.message}</h3>
         </div>
-        <div id="keypad">
+        {/* <div id="keypad">
           <button id="left" onClick={this.move} >LEFT</button>
           <button id="up" onClick={this.move} >UP</button>
           <button id="right" onClick={this.move} >RIGHT</button>
           <button id="down" onClick={this.move} >DOWN</button>
           <button id="reset" onClick={this.reset} >reset</button>
-        </div>
+        </div> */}
+        <DirectBtnClass state={this.state} initialState={initialState} getXY={this.getXY} coordinates={coordinates} setState={this.setState} />
         <form onSubmit={this.onSubmit} >
           <input id="email" type="email" placeholder="type email" onChange={this.onChange} value={this.state.email} ></input>
           <input id="submit" type="submit"></input>
