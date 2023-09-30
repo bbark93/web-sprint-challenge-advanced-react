@@ -2,10 +2,10 @@ import React from "react";
 
 export default class DirectBtnClass extends React.Component {
   reset = () => {
-    this.setState(this.props.initialState);
-    // Object.keys(this.props.initialState).forEach(key => {
-    //     this.props.updateState(this.props.key, key);
-    // });
+    this.props.updateState('message', this.props.initialState.message);
+    this.props.updateState('email', this.props.initialState.email);
+    this.props.updateState('index', this.props.initialState.index);
+    this.props.updateState('steps', this.props.initialState.steps);
   };
 
   getNextIndex = (direction) => {
@@ -18,8 +18,7 @@ export default class DirectBtnClass extends React.Component {
 
     for (let i = 0; i < this.props.coordinates.length; i++) {
       if (
-        this.props.coordinates[i].x == x &&
-        this.props.coordinates[i].y == y
+        this.props.coordinates[i].x == x && this.props.coordinates[i].y == y
       ) {
         return i;
       }
@@ -29,26 +28,14 @@ export default class DirectBtnClass extends React.Component {
   move = (evt) => {
     const direction = evt.target.id;
 
-    this.setState({message: this.props.initialState.message});
-    if (this.getNextIndex(direction) == this.props.state.index) {
-      this.setState({message: `You can't go ${direction}`});
-      return;
-    }
-    this.setState({index: this.getNextIndex(direction)});
-    console.log('getNextIndex =', this.getNextIndex(direction));
-    console.log('next index =',this.props.state.index);
-    this.setState({steps: this.props.state.steps + 1});
+    this.props.updateState('index',this.getNextIndex(direction));
+    this.props.updateState('steps',this.props.state.steps + 1);
   }
 
   render() {
     return (
       <div id="keypad">
         {["left", "up", "right", "down", "reset"].map((btn) => (
-        //   if (btn == "reset") {
-        //     <button id={btn} onClick={this.reset}>
-        //       {btn}
-        //     </button>;
-        //   }
           <button key={btn} id={btn} onClick={btn == 'reset' ? this.reset : this.move}>
             {btn}
           </button>
