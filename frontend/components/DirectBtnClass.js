@@ -28,6 +28,11 @@ export default class DirectBtnClass extends React.Component {
   move = (evt) => {
     const direction = evt.target.id;
 
+    this.props.updateState('message', this.props.initialState.message);
+    if (this.getNextIndex(direction) == this.props.state.index) {
+      this.props.updateState('message',`You can't go ${direction}`);
+      return;
+    }
     this.props.updateState('index',this.getNextIndex(direction));
     this.props.updateState('steps',this.props.state.steps + 1);
   }
