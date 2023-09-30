@@ -26,7 +26,7 @@ export default function InfoFunct(props) {
   return (
     <div className="info">
       <h3 id="coordinates">{getXYMessage(props.index)}</h3>
-      <h3 id="steps">{`You moved ${props.steps} times`}</h3>
+      <h3 id="steps">{`You moved ${props.steps} time${props.steps == 1 ? '': 's'}`}</h3>
     </div>
   );
 }
